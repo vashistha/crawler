@@ -22,8 +22,7 @@
     <property name="transactionManager" ref="transactionManager" />
     <property name="databaseType" value="derby" />
   </bean>
- <!--  <bean id="transactionManager"
-    class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" /> -->
+ <!--  <bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" /> -->
    
   <bean id="jobLauncher"
     class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
