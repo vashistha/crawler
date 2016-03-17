@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- stored job-meta in memory -->
+  <!--  
+  <bean id="jobRepository"
+    class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+    <property name="transactionManager" ref="transactionManager" />
+  </bean>
+   -->
+   
+   <!-- stored job-meta in database -->
+  <bean id="jobRepository" class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
+    <property name="dataSource" ref="batchMetaTableDataSource" />
+    <property name="transactionManager" ref="transactionManager" />
+    <property name="databaseType" value="derby" />
+  </bean>
+ <!--  <bean id="transactionManager"
+    class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" /> -->
+   
+  <bean id="jobLauncher"
+    class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+    <property name="jobRepository" ref="jobRepository" />
+  </bean>
+
+</beans>
