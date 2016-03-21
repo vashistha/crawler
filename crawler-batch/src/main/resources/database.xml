@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.springframework.org/schema/beans 
-    http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/jdbc 
-    http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <!-- connect to Derby database -->
-  <bean id="dataSource"
+  <!-- connect to Derby database. To avoid exception due to two datasource, make one datasource primary -->
+  <bean id="dataSource" primary="true"
     class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
     <property name="url" value="jdbc:derby://localhost:1527/JSF;create=true" />
@@ -16,24 +13,11 @@
     <property name="password" value="abcd@1234" />
   </bean>
 
-  <bean id="transactionManager"
-    class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
-
-  <!-- connect to Derby database for Batch Metadata -->
-  <bean id="batchMetaTableDataSource"
-    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+  <bean id="dataSource2" primary="true"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
-    <property name="url" value="jdbc:derby://localhost:1527/JSF;create=true;" />
+    <property name="url" value="jdbc:derby://localhost:1527/JSF;create=true" />
     <property name="username" value="root" />
     <property name="password" value="abcd@1234" />
   </bean>
-  
-  <!-- create job-meta tables automatically -->
-  <!-- <jdbc:initialize-database data-source="batchMetaTableDataSource">
-    <jdbc:script location="org/springframework/batch/core/schema-drop-derby.sql" />
-    <jdbc:script location="org/springframework/batch/core/schema-derby.sql" />
-  </jdbc:initialize-database> -->
-  
-  
-  
 </beans>

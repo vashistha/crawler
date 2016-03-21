@@ -1,5 +1,6 @@
 package com.vk.crawler;
 
+import com.vk.crawler.core.util.DateUtils;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
@@ -10,8 +11,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 
 @ImportResource({"classpath:/jobs/cobol-crawler-batch.xml",
-                 "classpath:/persistence-context.xml"})
+                 "classpath:/persistence-context.xml",
+                 "classpath:/spring-context.xml"})
+
 public class InvokeBatch {
+
   public static void main(String[] args) {
 
     SpringApplication app = new SpringApplication(InvokeBatch.class);
@@ -24,8 +28,9 @@ public class InvokeBatch {
     try {
 
       JobParametersBuilder paramBuilder = new JobParametersBuilder();
-      paramBuilder.addString("rootDirectory", "C:\\dev\\cobol_source");
+      paramBuilder.addString("rootDirectory", "\\home\\abcd\\devspace\\IntelliJwork\\logs");
       paramBuilder.addLong("triggerId", 1L);
+      paramBuilder.addLong("time", DateUtils.getCurrentDate().getTime());
       JobParameters jobParameters = paramBuilder.toJobParameters();
       JobExecution execution = jobLauncher.run(job, jobParameters);
       System.out.println("Exit Status : " + execution.getStatus());

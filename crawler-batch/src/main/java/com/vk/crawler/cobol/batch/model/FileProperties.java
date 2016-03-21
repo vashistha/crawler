@@ -31,7 +31,6 @@ public class FileProperties implements DataModel {
     this.digest = digest;
   }
   
-  @Override
   public boolean isEmpty() {
     return StringUtils.isEmpty(fileName);
   }

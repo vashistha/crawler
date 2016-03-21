@@ -7,7 +7,11 @@
       http://www.springframework.org/schema/beans/spring-beans.xsd
       http://www.springframework.org/schema/tx 
       http://www.springframework.org/schema/tx/spring-tx.xsd">
-  
+
+  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+  <tx:annotation-driven/>
+
   <import resource="database.xml" />
   
   <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -23,16 +27,11 @@
     <property name="dataSource" ref="dataSource"/>
   </bean>
 
-  <bean id="entityTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     <property name="entityManagerFactory" ref="entityManagerFactory" />
   </bean>
 
-  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
-  <tx:annotation-driven mode="aspectj" transaction-manager="entityTransactionManager" />
-
-  <bean id="cobolFileDao" class="com.vk.crawler.cobol.persistence.dao.CobolFileDao">
-   
-  </bean>
+  <bean id="cobolFileDao" class="com.vk.crawler.cobol.persistence.dao.CobolFileDao"/>
 
 </beans>

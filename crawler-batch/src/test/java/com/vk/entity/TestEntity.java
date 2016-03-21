@@ -2,6 +2,7 @@ package com.vk.entity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 import com.vk.crawler.cobol.persistence.dao.CobolFileDao;
@@ -9,7 +10,7 @@ import com.vk.crawler.cobol.persistence.entity.CobolFileEntity;
 
 @ImportResource({"classpath:/spring-context.xml", 
                  "classpath:/persistence-context.xml"})
-
+@Configuration
 public class TestEntity {
   public static void main(String[] args) {
 

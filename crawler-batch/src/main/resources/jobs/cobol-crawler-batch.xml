@@ -6,16 +6,15 @@
     http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <import resource="classpath:/spring-context.xml" />
+  <import resource="classpath:/jobs/batch-context.xml" />
   <import resource="classpath:/database.xml" />
   <!-- Spring should auto load this bean - this is required for JUnit test run-->
-  <bean class="org.springframework.batch.test.JobLauncherTestUtils"/>
   <bean class="org.springframework.batch.core.scope.StepScope" />
   
   <batch:job id="cobolFileAnalyserJob">
     <batch:step id="listFiles">
       <batch:tasklet>
-        <batch:chunk reader="fileListReader" writer="fileListWriter" processor="fileListProcessor" commit-interval="10" />
+        <batch:chunk reader="fileListReader" writer="fileListWriter" processor="fileListProcessor" commit-interval="100" />
       </batch:tasklet>
     </batch:step>
     <!-- <batch:step id="maintainFileHistory">

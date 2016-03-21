@@ -31,7 +31,6 @@ public class FileListProcessor implements ItemProcessor<FileProperties, CobolFil
     this.triggerId = triggerId;
   }
   
-  @Override
   public CobolFileEntity process(FileProperties file) throws Exception {
     CobolFileEntity entity = new CobolFileEntity();
     
@@ -39,7 +38,7 @@ public class FileListProcessor implements ItemProcessor<FileProperties, CobolFil
     entity.setRelativePath(file.getRelativePath());
     entity.setTriggerId(triggerId);
     try {
-      DigestUtils.md5Digest(new FileInputStream(rootDirectory + File.separator + file.getRelativePath() + File.separator + file.getFileName()));
+      entity.setDigest(DigestUtils.md5DigestAsHex(new FileInputStream(rootDirectory + File.separator + file.getRelativePath() + File.separator + file.getFileName())));
     }
     catch (IOException e) {
       logger.error("Exception in preparing digest", e);
