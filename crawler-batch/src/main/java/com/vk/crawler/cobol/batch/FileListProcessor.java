@@ -1,3 +1,25 @@
+/*
+ * Copyright (C) 2016 by Vashistha kumar
+ *
+ *    Permission is hereby granted, free of charge, to any person obtaining a copy
+ *    of this software and associated documentation files (the "Software"), to deal
+ *    in the Software without restriction, including without limitation the rights
+ *    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *    copies of the Software, and to permit persons to whom the Software is
+ *    furnished to do so, subject to the following conditions:
+ *
+ *    The above copyright notice and this permission notice shall be included in
+ *    all copies or substantial portions of the Software.
+ *
+ *    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *    THE SOFTWARE.
+ */
+
 package com.vk.crawler.cobol.batch;
 
 import java.io.File;
@@ -11,7 +33,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.DigestUtils;
 
-import com.vk.crawler.cobol.batch.model.FileProperties;
+import com.vk.crawler.cobol.model.FileProperties;
 import com.vk.crawler.cobol.persistence.entity.CobolFileEntity;
 
 @StepScope
@@ -21,15 +43,9 @@ public class FileListProcessor implements ItemProcessor<FileProperties, CobolFil
   
   @Value("#{jobParameters['rootDirectory']}")
   private String rootDirectory;
-  public void setRootDirectory(final String name) {
-    this.rootDirectory = name;
-  }
   
   @Value("#{jobParameters['triggerId']}")
   private Integer triggerId;
-  public void setTriggerId(Integer triggerId) {
-    this.triggerId = triggerId;
-  }
   
   public CobolFileEntity process(FileProperties file) throws Exception {
     CobolFileEntity entity = new CobolFileEntity();

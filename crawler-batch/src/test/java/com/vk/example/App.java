@@ -20,41 +20,41 @@
  *    THE SOFTWARE.
  */
 
-package com.vk.crawler;
+package com.vk.example;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 
-@ImportResource({"classpath:/jobs/cobol-crawler-batch.xml",
-  "classpath:/persistence-context.xml",
-  "classpath:/spring-context.xml"})
+@ImportResource({"classpath:/test/config/test-batch-config.xml",
+		"classpath:/spring-context.xml",
+		"classpath:/jobs/batch-context.xml"})
+public class App {
+	public static void main(String[] args) {
 
-public class CrawlerApplication {
-
-  private static final Logger logger = LoggerFactory.getLogger(CrawlerApplication.class);
-  
-  public static void main(String[] args) {
-    //ConfigurableApplicationContext ctx= SpringApplication.run(CrawlerApplication.class, args);
-    SpringApplication app = new SpringApplication(CrawlerApplication.class);
+	  SpringApplication app = new SpringApplication(App.class);
     app.setWebEnvironment(false);
     ConfigurableApplicationContext ctx= app.run(args);
-    CrawlerApplication obj = new CrawlerApplication();
-   
-    obj.runCobolCrawler(ctx);
-   }
-  
-  public void runCobolCrawler(ConfigurableApplicationContext ctx) {
-    try {
-      InvokeCobolCrawler cobolCrawler = (InvokeCobolCrawler) ctx.getBean("cobolCrawler");
-      cobolCrawler.start(1);
-      logger.debug("Cobol Crawler completed successfully.");
-    }
-    catch (Exception e) {
-      logger.error("EXCEPTION");
-      logger.error("", e);
-    }
-  }
+		
+		JobLauncher jobLauncher = (JobLauncher) ctx.getBean("jobLauncher");
+		Job job = (Job) ctx.getBean("helloWorldJob");
+
+		try {
+
+		  JobParameters jobParameters = new JobParametersBuilder().addLong("time",System.currentTimeMillis()).toJobParameters();
+			JobExecution execution = jobLauncher.run(job, jobParameters);
+			System.out.println("Exit Status : " + execution.getStatus());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("Done");
+
+	}
 }
