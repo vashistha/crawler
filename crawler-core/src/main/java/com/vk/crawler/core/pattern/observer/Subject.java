@@ -22,21 +22,33 @@
 
 package com.vk.crawler.core.pattern.observer;
 
+import java.util.Observable;
+
 import com.vk.crawler.core.exception.CoreException;
 
 
-public interface Subject {
+public abstract class Subject extends Observable {
   
-  //methods to register and unregister observers
-  public void register(Observer obj);
-  public void unregister(Observer obj);
+  /**Register an observer with this subject.*/
+  public void register(java.util.Observer obj) {
+    super.addObserver(obj);
+  }
+  
+  /**Unregister an observer with this subject.*/
+  public void unregister(java.util.Observer obj) {
+    super.deleteObserver(obj);
+  }
 
-  //methods to notify observers of change
-  public void notifyObservers_preProcess() throws CoreException;
-  public void notifyObservers_postProcess() throws CoreException;
+  /**Notify observer(s) before process starts in the subject.*/
+  public abstract void notifyObservers_preProcess() throws CoreException;
+  
+  /**Notify observer(s) after process ends in the subject*/
+  public abstract void notifyObservers_postProcess() throws CoreException;
 
-  //methods to get updates from subject
-  public Object getUpdate(Observer obj);
-  public Object getUpdate();
+  /**Called from observer to get updates from the subject. Observer specific update.*/
+  public abstract Object getUpdate(Observer obj);
+  
+  /**Called from observer to get updates from the subject. Generic update.*/
+  public abstract Object getUpdate();
   
 }

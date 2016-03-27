@@ -31,10 +31,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 
+import com.vk.batch.ExampleBatchTest;
+
 @ImportResource({"classpath:/test/config/test-batch-config.xml",
 		"classpath:/spring-context.xml",
 		"classpath:/jobs/batch-context.xml"})
 public class App {
+  
+  /**
+   * Outcome of this test is same as {@link ExampleBatchTest}
+   * @param args
+   */
 	public static void main(String[] args) {
 
 	  SpringApplication app = new SpringApplication(App.class);

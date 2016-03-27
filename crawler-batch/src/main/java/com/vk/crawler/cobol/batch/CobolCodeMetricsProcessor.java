@@ -23,6 +23,7 @@
 package com.vk.crawler.cobol.batch;
 
 import java.io.File;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ import com.vk.crawler.cobol.SourceCodeAnalyser;
 import com.vk.crawler.cobol.model.CobolFileCodeMetrics;
 import com.vk.crawler.cobol.persistence.entity.CobolFileCodeMetricsEntity;
 import com.vk.crawler.cobol.persistence.entity.CobolFileEntity;
+import com.vk.crawler.core.util.FileUtils;
 
 @StepScope
 public class CobolCodeMetricsProcessor implements ItemProcessor<CobolFileEntity, CobolFileCodeMetricsEntity> {
@@ -48,12 +50,20 @@ public class CobolCodeMetricsProcessor implements ItemProcessor<CobolFileEntity,
   
   public CobolFileCodeMetricsEntity process(CobolFileEntity fileEntity) throws Exception {
     logger.debug("Processing file-", fileEntity.getRelativePath() + File.separator + fileEntity.getFileName());
-    SourceCodeAnalyser sourceCode = new SourceCodeAnalyser();
-    CobolFileCodeMetrics model = sourceCode.process(rootDirectory + File.separator + fileEntity.getRelativePath() + File.separator + fileEntity.getFileName());
+    
+    CobolFileCodeMetrics model = process(rootDirectory + File.separator + fileEntity.getRelativePath() + File.separator + fileEntity.getFileName());
     
     CobolFileCodeMetricsEntity entity = CobolFileCodeMetricsEntity.valueOf(model);
     entity.setCobolFileId(fileEntity.getId());
     entity.setTriggerId(triggerId);
     return entity;
   }
+  
+  public CobolFileCodeMetrics process(String fileNameWithAbsolutePath) {
+    
+    List<String> codeLines = FileUtils.readLines(fileNameWithAbsolutePath); 
+    SourceCodeAnalyser analyser = new SourceCodeAnalyser();
+    CobolFileCodeMetrics model = analyser.analyse(codeLines);
+    return model;
+  } 
 }

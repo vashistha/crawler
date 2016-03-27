@@ -25,11 +25,22 @@ package com.vk.crawler.core.pattern.observer;
 import com.vk.crawler.core.exception.CoreException;
 
 
-public interface Observer {
-  //methods to update the observer, used by subject
+public interface Observer extends java.util.Observer {
+  
+  /**
+   * Called from subject before processing starts in the subject. 
+   * Mostly used to initialise resource in observer before processing starts.
+   */
   public void update_preProcess() throws CoreException;
+  
+  /**
+   * Called from subject after processing ends in the subject. 
+   * Mostly used to start processing in observer.
+   */
   public void update_postProcess() throws CoreException;
 
-  //attach with subject to observe
+  /**
+   * Set a subject to this observer.
+   */
   public void setSubject(Subject sub);
 }

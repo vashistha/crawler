@@ -107,7 +107,7 @@ public class FileListReader implements ItemReader<FileProperties> {
    */
   public static void main(String[] arg) {
     FileListReader obj = new FileListReader();
-    obj.setRootDirectory("src\\main\\resources");
+    obj.setRootDirectory("/home/abcd/devspace/IntelliJwork/crawler/sample");
     obj.init();
   }
 }

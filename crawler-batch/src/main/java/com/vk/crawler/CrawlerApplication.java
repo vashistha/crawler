@@ -28,9 +28,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 
-@ImportResource({"classpath:/jobs/cobol-crawler-batch.xml",
-  "classpath:/persistence-context.xml",
-  "classpath:/spring-context.xml"})
+@ImportResource({"classpath:/spring-context.xml",
+    "classpath:/persistence-context.xml",
+    "classpath:/jobs/cobol-crawler-batch.xml"})
 
 public class CrawlerApplication {
 
@@ -49,7 +49,7 @@ public class CrawlerApplication {
   public void runCobolCrawler(ConfigurableApplicationContext ctx) {
     try {
       InvokeCobolCrawler cobolCrawler = (InvokeCobolCrawler) ctx.getBean("cobolCrawler");
-      cobolCrawler.start(1);
+      cobolCrawler.start(2);
       logger.debug("Cobol Crawler completed successfully.");
     }
     catch (Exception e) {

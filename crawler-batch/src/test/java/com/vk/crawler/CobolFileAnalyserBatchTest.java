@@ -36,8 +36,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-    "classpath:/jobs/cobol-crawler-batch.xml",
-    "classpath:/spring-context.xml"})
+    "classpath:/test/config/test-batch-config.xml",
+    "classpath:/spring-context.xml",
+    "classpath:/jobs/batch-context.xml"})
 public class CobolFileAnalyserBatchTest {
 
     @Autowired

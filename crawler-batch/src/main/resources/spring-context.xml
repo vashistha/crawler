@@ -32,6 +32,6 @@
 
   <context:annotation-config/>
   
-  <bean id="cobolCrawler" class="com.vk.crawler.InvokeCobolCrawler"/>
+  
   
 </beans>

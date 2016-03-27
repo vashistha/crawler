@@ -198,7 +198,7 @@ public class FileUtils {
   public static List<String> readLines(String fileNameWithAbsolutePath) {
     List<String> lines = new ArrayList<String>();
     try {
-      lines = org.apache.commons.io.FileUtils.readLines(new File(fileNameWithAbsolutePath,"UTF-8"));
+      lines = org.apache.commons.io.FileUtils.readLines(new File(fileNameWithAbsolutePath), "UTF-8");
     } 
     catch (IOException e) {
       logger.error("", e);

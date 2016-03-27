@@ -119,8 +119,8 @@ public class CobolFileCodeMetricsEntity implements DataModel {
     a.setCobolFileId(model.getCobolFileId());
     a.setDescription(model.getDescription());
     a.setId(model.getId());
-    a.setLocActive(model.getLocActive());
-    a.setLocComment(model.getLocComment());
+    a.setLocActive(model.getLocActive() == null ? 0 : model.getLocActive());
+    a.setLocComment(model.getLocComment() == null ? 0 : model.getLocComment());
     a.setTriggerId(model.getTriggerId());
     
     return a;

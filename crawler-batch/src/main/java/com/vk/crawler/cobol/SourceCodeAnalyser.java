@@ -23,19 +23,43 @@
 package com.vk.crawler.cobol;
 
 import java.util.List;
-
-
+import java.util.Observable;
 
 import com.vk.crawler.cobol.model.CobolFileCodeMetrics;
-import com.vk.crawler.core.util.FileUtils;
+import com.vk.crawler.cobol.model.CodeAnalysisHelper;
 
-public class SourceCodeAnalyser {
+public class SourceCodeAnalyser extends Observable {
 
-  public CobolFileCodeMetrics process(String fileNameWithAbsolutePath) {
-    CobolFileCodeMetrics model = new CobolFileCodeMetrics();
-    List<String> codeLines = FileUtils.readLines(fileNameWithAbsolutePath); 
-
-    return model;
+  /**
+   * List of observers can be added by DI using spring config.
+   */
+  public SourceCodeAnalyser() {
+    super();
+    addObserver(new DescriptionObserver());
+    addObserver(new LOCObserver());
   }
-  
+
+  /**
+   * Analyses the code lines passed as <code>codeLines</code> and then returns {@link CobolFileCodeMetrics}.
+   * Observer pattern is used to get different aspect of analysis such as number of lines of code or file description
+   * available inside code. 
+   * @param codeLines
+   * @return {@link CobolFileCodeMetrics}
+   */
+  public CobolFileCodeMetrics analyse(List<String> codeLines) {
+    CobolFileCodeMetrics codeMetrics = new CobolFileCodeMetrics();
+    CodeAnalysisHelper helper = new CodeAnalysisHelper(codeMetrics);
+    /*
+     * By default observers will be notified one by one.
+     * notifyObservers can be overridden to invoke each observer in independent thread. This will improve
+     * performance of the analyser but make sure an observer is changed to process each codeLine in correct
+     * sequence.  
+     */
+    for (String codeLine : codeLines) {
+      helper.setCodeLine(codeLine);
+      setChanged();
+      notifyObservers(helper);
+    }
+    return codeMetrics;
+  }
 }

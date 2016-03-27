@@ -30,7 +30,10 @@
 
   <import resource="classpath:/spring-context.xml" />
   <import resource="classpath:/database.xml" />
-  
+
+  <!-- Spring should auto load this bean - this is required for JUnit test run-->
+  <bean class="org.springframework.batch.test.JobLauncherTestUtils"/>
+
   <bean id="report" class="com.vk.example.model.Report" scope="prototype" />
   <bean id="itemProcessor" class="com.vk.example.CustomItemProcessor" />
 

@@ -43,8 +43,13 @@ public class StringUtils {
     else
       return source;
   }
+  
   public static String removeWhiteSpace(String source) {
     return isEmpty(source) ? source : source.replaceAll("\\s","");
+  }
+  
+  public static String replace(String source, String regex, String replacement) {
+    return isEmpty(source) ? source : source.replaceAll(regex,replacement);
   }
   
   public static String preTrimToLength(String source, int toLength) {
@@ -90,5 +95,16 @@ public class StringUtils {
       out.append(alphanumeric[idx]);
     }
     return out.toString();
+  }
+  
+  /**
+   * Add newline character at the end of <code>source</code> string.
+   */
+  public static String endWithNewLineChar(String source) {
+    return source + "\n";
+  }
+  
+  public static String trim(String source) {
+    return source == null ? null : source.trim();
   }
 }
