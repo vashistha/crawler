@@ -36,7 +36,7 @@ import com.vk.batch.ExampleBatchTest;
 @ImportResource({"classpath:/test/config/test-batch-config.xml",
 		"classpath:/spring-context.xml",
 		"classpath:/jobs/batch-context.xml"})
-public class App {
+public class InvokeExampleBatch {
   
   /**
    * Outcome of this test is same as {@link ExampleBatchTest}
@@ -44,7 +44,7 @@ public class App {
    */
 	public static void main(String[] args) {
 
-	  SpringApplication app = new SpringApplication(App.class);
+	  SpringApplication app = new SpringApplication(InvokeExampleBatch.class);
     app.setWebEnvironment(false);
     ConfigurableApplicationContext ctx= app.run(args);
 		
