@@ -1,0 +1,77 @@
+<!--
+  ~ Copyright (C) 2016 by Vashistha kumar
+  ~
+  ~  Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  of this software and associated documentation files (the "Software"), to deal
+  ~  in the Software without restriction, including without limitation the rights
+  ~  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  copies of the Software, and to permit persons to whom the Software is
+  ~  furnished to do so, subject to the following conditions:
+  ~
+  ~  The above copyright notice and this permission notice shall be included in
+  ~  all copies or substantial portions of the Software.
+  ~
+  ~  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~  THE SOFTWARE.
+  -->
+
+<ui:composition template="/jsf/template/Layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+  <ui:define name="title">About AppCrawler&#8482;&#169;</ui:define>
+  <ui:define name="contentArea">
+    <h:form id="error">
+      <p:panel header="About AppCrawler&#8482;&#169;" styleClass="main-panel">
+        <p:accordionPanel >
+          
+          <p:tab title="AppCrawler:\>who am i" rendered="false">
+            <h:panelGrid columns="1" cellpadding="10">
+            </h:panelGrid>
+          </p:tab>
+          
+          <p:tab title="Technology stack of LifeLine">
+            <p:dataTable var="tech" value="#{aboutLifeLine.stack}">
+              <p:column headerText="Technology Name">
+                  <h:outputText value="#{tech.name}" />
+              </p:column>
+      
+              <p:column headerText="Version">
+                  <h:outputText value="#{tech.version}" />
+              </p:column>
+      
+              <p:column headerText="Used at YBS?">
+                  <h:outputText value="#{tech.usedAtClient}" />
+              </p:column>
+      
+              <p:column headerText="License Type">
+                  <h:outputText value="#{tech.licenseType}" />
+              </p:column>
+              
+              <p:column headerText="Remarks">
+                  <h:outputText value="#{tech.remarks}" />
+              </p:column>
+          </p:dataTable>
+          </p:tab>
+          
+          <p:tab title="Roadmap" rendered="false">
+            <h:panelGrid columns="1" cellpadding="10">
+              <h:outputText value="Phase 1. Cobol file crawler."/>
+              <h:outputText value="Phase 2. Database meta-data crawler."/>
+              <h:outputText value="Phase 3. PL/SQL crawler including triggers and package-procedures."/>
+              <h:outputText value="Phase 4. Oracle WebForm crawler"/>
+              <h:outputText value="Phase 5. SOA layer crawler"/>
+              <h:outputText value="Integration phase - integrate output of each phase"/>
+            </h:panelGrid>
+          </p:tab>
+        </p:accordionPanel>
+        <f:facet name="actions">
+          <p:button outcome="welcome" icon="ui-icon-home" title="To home page" styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"></p:button>
+        </f:facet>
+      </p:panel>
+    </h:form>
+  </ui:define>
+</ui:composition>

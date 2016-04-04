@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+ <f:facet name="first">
+    <meta http-equiv="X-UA-Compatible" content="IE=8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+  </f:facet>
+  
+  <f:facet name="last">
+    <title><ui:insert name="title">AppEye&#8482;&#169;</ui:insert></title>
+  </f:facet>
+  <h:outputScript library="js" name="app-crawler.js" />
+  <h:outputStylesheet name="css/boots/app-crawler.css" />
+  <link rel="shortcut icon" type="image/x-icon"
+    href="/ai/resources/image/favicon.ico" />
+  
+</h:head>
+
+<h:body>
+  <b:container>
+    <div id="container">
+      <div id="header">
+       
+      </div>
+      <div id="content">
+       <h:outputText value="#{testBean.hello}"></h:outputText>
+      </div>
+      <div id="footer">
+       
+      </div>
+    </div>
+  </b:container>
+</h:body>
+
+</html>

@@ -1,0 +1,44 @@
+<!--
+  ~ Copyright (C) 2015 by Vashistha kumar
+  ~
+  ~  Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  of this software and associated documentation files (the "Software"), to deal
+  ~  in the Software without restriction, including without limitation the rights
+  ~  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  copies of the Software, and to permit persons to whom the Software is
+  ~  furnished to do so, subject to the following conditions:
+  ~
+  ~  The above copyright notice and this permission notice shall be included in
+  ~  all copies or substantial portions of the Software.
+  ~
+  ~  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~  THE SOFTWARE.
+  -->
+
+<ui:composition template="/jsf/template/Layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+  <ui:define name="title">Under construction</ui:define>
+  <ui:define name="contentArea">
+    <h:form id="wipg">
+      <p:panel header="Work in progress" footer="Thank you for your time">
+        <p>
+          <h:outputText value="This functionalitiy is under Incubation Phase." />
+        </p>
+        <p>
+          <h:outputText value="Please contact your LifeLine&#8482;&#169; sponsor or email to" />
+          <a href="mailto:vkumar2@ybs.co.uk?subject=WIPG%20status&amp;body=Please%20provide%20approximate%20time%20line.">service provider</a>
+        </p>
+        
+        <f:facet name="actions">
+          <p:button outcome="/welcome" icon="ui-icon-home" title="To Welcome page"
+            styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"></p:button>
+        </f:facet>
+      </p:panel>
+    </h:form>
+  </ui:define>
+</ui:composition>
