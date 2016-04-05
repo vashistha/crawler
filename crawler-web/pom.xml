@@ -115,11 +115,6 @@
       <version>1.0.10</version>
     </dependency>
     <dependency>
-      <groupId>net.bootsfaces</groupId>
-      <artifactId>bootsfaces</artifactId>
-      <version>0.8.0</version>
-    </dependency>
-    <dependency>
       <groupId>com.lowagie</groupId>
       <artifactId>itext</artifactId>
       <version>2.1.7</version>
@@ -143,7 +138,7 @@
       <!-- This is required to remove the error http://stackoverflow.com/questions/32799225/javax-faces-facesexception-expression-error-named-object-net-bootsfaces-layou -->
       <groupId>net.bootsfaces</groupId>
       <artifactId>bootsfaces</artifactId>
-      <version>0.7.0</version>
+      <version>0.8.0</version>
     </dependency>
   </dependencies>
   

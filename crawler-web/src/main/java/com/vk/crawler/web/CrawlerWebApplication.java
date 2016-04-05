@@ -64,11 +64,11 @@ public class CrawlerWebApplication extends SpringBootServletInitializer {
   }
   
   @Bean
-  public static CustomScopeConfigurer customScopeConfigurer(){
-      CustomScopeConfigurer configurer = new CustomScopeConfigurer();
-      Map<String, Object> scopes = new HashMap<String, Object>();
-      scopes.put("view", new ViewScope());
-      configurer.setScopes(scopes);
-      return configurer;
+  public static CustomScopeConfigurer customScopeConfigurer() {
+    CustomScopeConfigurer configurer = new CustomScopeConfigurer();
+    Map<String, Object> scopes = new HashMap<String, Object>();
+    scopes.put("view", new ViewScope());
+    configurer.setScopes(scopes);
+    return configurer;
   }
 }
