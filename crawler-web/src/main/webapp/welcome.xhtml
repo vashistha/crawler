@@ -20,85 +20,23 @@
   ~  THE SOFTWARE.
   -->
 
-<ui:composition template="/jsf/template/Layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" 
+<ui:composition template="/jsf/template/Layout.xhtml" 
+  xmlns="http://www.w3.org/1999/xhtml" 
   xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:h="http://xmlns.jcp.org/jsf/html" 
   xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
   xmlns:p="http://primefaces.org/ui" 
   xmlns:b="http://bootsfaces.net/ui">
-  <ui:define name="title">Welcome</ui:define>
+  <ui:define name="title">AppEye&#8482;&#169;</ui:define>
   <ui:define name="contentArea">
   <h:form id="welcome">
-      <p:panel header="Welcome to LifeLine" footer="Use this LifeLine responsibly" styleClass="main-panel">
-        
-        <h:outputText value="To use and explore LifeLine, please login. If not yet registered sign up before login." rendered="#{userSessionBean.active ne 'true'}"/>
-        
-        <br/>
-        <h:outputText value="Workflow (actionable items and work delegation) functionality will be displayed here." rendered="false"/>
-        <br/>
-        <br/>
-
-          
-        <br/>
-        <br/>
-        <br/>
-        <p:separator></p:separator>
-        <b><h:outputText value="Functionality tracking" rendered="#{userSessionBean.active}"/></b>
-        
-        <p:scrollPanel style="width:100%;height:200px" mode="native" rendered="#{userSessionBean.active}">
-          <b:panelGrid colSpans="2,10" style="width:90%; margin-left:5px">
-             <h:outputLink value="apps/compliance/leave/leave_home.xhtml">Leave tracker</h:outputLink>
-             <h:outputText value="Easy to add, update and maintain leave tracker. It handles onsite-offshore working holidays, allocations and working hours. For admin user it is easy to navigate past and future leaves and also easy to filter the associates by program, project and team."/>
-             <h:outputLink value="apps/personal/visa.xhtml">Visa and COS</h:outputLink>
-             <h:outputText value="Secure and easy way to maintain visa and cos details of team. Role based access to visa details of other associate."/>
-             <h:outputLink value="apps/operational/billing/billing_home.xhtml">Billings</h:outputLink>
-             <h:outputText value="Billing functionality displays monthly billing of an associate or a team or entire program after discounting public holidays, leaves, weekends, joining and leaving dates. It handles the cases such as partial allocation of a associate on two multiple project, onshore-offshore allocation in same months etc. Access to this functionality is restricted to unauthorised role."/>
-             <h:outputLink value="apps/operational/allocation/allocation_home.xhtml">Project allocations</h:outputLink>
-             <h:outputText value="Keep track of allocation for utilisation and billing purpose."/>
-             <h:outputLink value="apps/kss/session.xhtml">Knowledge sharing sessions</h:outputLink>
-             <h:outputText value="Manage knowledge sharing session details, configure attendees, ask for feedback, provide feedback."/>
-             <h:outputLink value="apps/breakout/ecard.xhtml">Sign e-Card</h:outputLink>
-             <h:outputText value="Write your best wishes to dearest one, sign the PDF and share with others."/>
-             <h:outputLink value="apps/authentication/change_password.xhtml">Change password</h:outputLink>
-             <h:outputText value="This is password change functionality. LifeLine also provides tocken based authentication, you need not to remember password."/>
-             <h:outputLink value="apps/personal/document_library.xhtml">Document library</h:outputLink>
-             <h:outputText value="Organise your personal and project related documents." />
-             <h:outputLink value="apps/profile/tracker.xhtml">Profile tracker</h:outputLink>
-             <h:outputText value="Keep the track of new joinee starting from resume selection till on boarding." />
-             <h:outputLink value="apps/issue_tracker.xhtml">Issue tracker</h:outputLink>
-             <h:outputText value="Log and view the issues/ features/ enhancement request related to lifeline." />
-             <h:outputLink value="about.xhtml">About LifeLine</h:outputLink>
-             <h:outputText value="Brief description about this app." />
-          </b:panelGrid>
-        </p:scrollPanel>
-        
-        <h:panelGrid id ="buttonsOnWelcoe" columns="3" cellpadding="10" rendered="#{userSessionBean.active ne 'true'}">
-          <p:button outcome="index" value="To login page" icon="ui-icon-unlocked"></p:button>
-          <p:button outcome="/guest/signup" value="Sign Up" icon="ui-icon-clipboard" ></p:button>
-        </h:panelGrid>
+    <p:panel header="Welcome to AppEye" footer="AppEye gives you a complete view of your application components" styleClass="main-panel">
         
         <f:facet name="actions">
-          <p:button outcome="about" icon="ui-icon-help" title="About lifeline" styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"></p:button>
-         <!--  <p:commandButton title="Mark Office Out Time" update="markOut" oncomplete="PF('dlgOut').show()" icon="ui-icon-circle-arrow-n" styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default" rendered="#{userSessionBean.active}"/>
-          <p:commandButton title="Mark Office In Time" update="markIn" oncomplete="PF('dlgIn').show()" icon="ui-icon-circle-arrow-s" styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default" rendered="#{userSessionBean.active}"/> -->
+          <p:button outcome="about" icon="ui-icon-help" title="About AppEye" 
+            styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"></p:button>
         </f:facet>
       </p:panel>
-      <p:dialog header="Welcome" widgetVar="dlgIn" showEffect="fade" hideEffect="fade" modal="true" width="400px" minHeight="50" resizable = "true" closeOnEscape="true">
-        <h:panelGrid id="markIn">
-          <h:outputText  value="Welcome to office Mx ..." escape="false" />
-          <br/>
-          <h:outputText  value="You have successfully marked your in time." escape="false" />
-          <h:outputText  value="This is sample page, functionality is not available yet." escape="false" styleClass="footnote"/>
-        </h:panelGrid>
-      </p:dialog>
-     <p:dialog header="Thank you" widgetVar="dlgOut" showEffect="fade" hideEffect="fade" modal="true" width="400px" minHeight="50" resizable = "true" closeOnEscape="true">
-      <h:panelGrid id="markOut">
-        <h:outputText  value="Thank you Mx ..." escape="false" />
-        <br/>
-        <h:outputText  value="You have successfully marked your out time." escape="false" />
-        <h:outputText  value="This is sample page, functionality is not available yet." escape="false" styleClass="footnote"/>
-      </h:panelGrid>
-    </p:dialog>
     </h:form>
     
   </ui:define>

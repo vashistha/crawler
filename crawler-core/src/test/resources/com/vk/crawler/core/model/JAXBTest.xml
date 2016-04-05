@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<table name="techStack">
+  <row id="0" header="true">
+    <column id="1" value="Technology Name"/>
+    <column id="2" value="Version"/>
+    <column id="3" value="License Type"/>
+    <column id="4" value="Remarks"/>
+  </row>
+  <row id="1">
+    <column id="1" value="Java Server Faces"/>
+    <column id="2" value="2.2.10"/>
+    <column id="3" value="Open source"/>
+    <column id="4" value="Component based web technology like Oracle Form."/>
+  </row>
+</table>

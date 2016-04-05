@@ -41,6 +41,10 @@ public class CodeAnalysisHelper {
     codeMetrics.increamentActiveLoc();
   }
   
+  public void increamentOtherLoc() {
+    codeMetrics.increamentOtherLoc();
+  }
+  
   public String getTrimmedCodeLine() {
     return codeLine == null ? null : codeLine.trim();
   }

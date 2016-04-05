@@ -33,7 +33,7 @@
             </h:panelGrid>
           </p:tab>
           
-          <p:tab title="Technology stack of LifeLine">
+          <p:tab title="Technology stack of AppEye">
             <p:dataTable var="tech" value="#{aboutLifeLine.stack}">
               <p:column headerText="Technology Name">
                   <h:outputText value="#{tech.name}" />
@@ -57,19 +57,19 @@
           </p:dataTable>
           </p:tab>
           
-          <p:tab title="Roadmap" rendered="false">
+          <p:tab title="Roadmap" rendered="true">
             <h:panelGrid columns="1" cellpadding="10">
               <h:outputText value="Phase 1. Cobol file crawler."/>
-              <h:outputText value="Phase 2. Database meta-data crawler."/>
+              <h:outputText value="Phase 2. Meta-data crawler for Database."/>
               <h:outputText value="Phase 3. PL/SQL crawler including triggers and package-procedures."/>
               <h:outputText value="Phase 4. Oracle WebForm crawler"/>
               <h:outputText value="Phase 5. SOA layer crawler"/>
-              <h:outputText value="Integration phase - integrate output of each phase"/>
+              <h:outputText value="Integration phase - integrate output of each phase and display them on GUI"/>
             </h:panelGrid>
           </p:tab>
         </p:accordionPanel>
         <f:facet name="actions">
-          <p:button outcome="welcome" icon="ui-icon-home" title="To home page" styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"></p:button>
+          <p:button outcome="welcome" icon="ui-icon-home" title="To Dashboard" styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"></p:button>
         </f:facet>
       </p:panel>
     </h:form>

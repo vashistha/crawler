@@ -4,6 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import com.vk.crawler.cobol.model.CodeAnalysisHelper;
+import com.vk.crawler.core.util.StringUtils;
 
 public class LOCObserver implements Observer {
 
@@ -20,8 +21,11 @@ public class LOCObserver implements Observer {
     if (helper.getTrimmedCodeLine().startsWith("*")) {
       helper.increamentCommentedLoc();
     }
-    else {
+    else if (!StringUtils.isEmpty(helper.getTrimmedCodeLine())){
       helper.increamentActiveLoc();
+    }
+    else {
+      helper.increamentOtherLoc();
     }
   }
 }

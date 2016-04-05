@@ -22,8 +22,12 @@
 
 package com.vk.crawler.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.faces.webapp.FacesServlet;
 
+import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,6 +36,8 @@ import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+
+import com.vk.crawler.web.jsf.utils.ViewScope;
 
 /**
  * Created by Vashistha Kumar on 27/03/16.
@@ -55,5 +61,14 @@ public class CrawlerWebApplication extends SpringBootServletInitializer {
     FacesServlet servlet = new FacesServlet();
     ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(servlet, "*.jsf", "*.xhtml");
     return servletRegistrationBean;
+  }
+  
+  @Bean
+  public static CustomScopeConfigurer customScopeConfigurer(){
+      CustomScopeConfigurer configurer = new CustomScopeConfigurer();
+      Map<String, Object> scopes = new HashMap<String, Object>();
+      scopes.put("view", new ViewScope());
+      configurer.setScopes(scopes);
+      return configurer;
   }
 }

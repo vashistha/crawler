@@ -57,6 +57,9 @@ public class CobolFileCodeMetricsEntity implements DataModel {
   @Column(name = "LOC_COMMENT")
   private Integer locComment;
   
+  @Column(name = "LOC_Other")
+  private Integer locOther;
+  
   private String description;
   
   @Column(name = "TRIGGER_ID")
@@ -110,6 +113,14 @@ public class CobolFileCodeMetricsEntity implements DataModel {
     this.triggerId = triggerId;
   }
 
+  public Integer getLocOther() {
+    return locOther;
+  }
+
+  public void setLocOther(Integer locOther) {
+    this.locOther = locOther;
+  }
+
   public boolean isEmpty() {
     return NumberUtils.isEmpty(cobolFileId);
   }
@@ -122,7 +133,7 @@ public class CobolFileCodeMetricsEntity implements DataModel {
     a.setLocActive(model.getLocActive() == null ? 0 : model.getLocActive());
     a.setLocComment(model.getLocComment() == null ? 0 : model.getLocComment());
     a.setTriggerId(model.getTriggerId());
-    
+    a.setLocOther(model.getLocOther());
     return a;
   }
   
@@ -135,16 +146,14 @@ public class CobolFileCodeMetricsEntity implements DataModel {
     a.setLocActive(locActive);
     a.setLocComment(locComment);
     a.setTriggerId(triggerId);
-    
+    a.setLocOther(locOther);
     return a;
   }
-  
+
   public String toString() {
-    return "<CobolFileCodeMetricsEntity><id>" + id + "</id><cobolFileId>"
-        + cobolFileId + "</cobolFileId><locActive>" + locActive
-        + "</locActive><locComment>" + locComment
-        + "</locComment><description>" + description
-        + "</description><triggerId>" + triggerId
+    return "<CobolFileCodeMetricsEntity><id>" + id + "</id><cobolFileId>" + cobolFileId + "</cobolFileId><locActive>"
+        + locActive + "</locActive><locComment>" + locComment + "</locComment><locOther>" + locOther
+        + "</locOther><description>" + description + "</description><triggerId>" + triggerId
         + "</triggerId></CobolFileCodeMetricsEntity>";
   }
 }

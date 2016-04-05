@@ -65,12 +65,13 @@
 }
 
 .main-panel thead tr th.ui-state-default {
-  background: none repeat scroll 0 0 #4FC3F7;
-  border-radius: 0px;
-  border-color: #337ab7;
-  text-shadow: none;
+  #background: none repeat scroll 0 0 #4FC3F7;
+  #border-radius: 0px;
+  #border-color: #337ab7;
+  #text-shadow: none;
   font-weight: normal;
-  border-bottom-width: 1.5px;
+  #border-bottom-width: 1.5px;
+  color: #337ab7
 }
 .ui-datatable-header,
 .ui-paginator {

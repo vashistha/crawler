@@ -80,7 +80,7 @@ public class ViewMessage extends Message {
 
   @Override
   public String toString() {
-    return "<LifeLineMessage><code>" + code + "</code><fieldId>" + fieldId + "</fieldId>" + super.toString() + "</LifeLineMessage>";
+    return "<ViewMessage><code>" + code + "</code><fieldId>" + fieldId + "</fieldId>" + super.toString() + "</ViewMessage>";
   }
 
   @Override

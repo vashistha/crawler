@@ -34,7 +34,7 @@
 
   <tx:annotation-driven/>
 
-  <import resource="database.xml" />
+  <import resource="classpath:/database.xml" />
   
   <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
     <property name="databasePlatform" value="org.hibernate.dialect.DerbyDialect" />

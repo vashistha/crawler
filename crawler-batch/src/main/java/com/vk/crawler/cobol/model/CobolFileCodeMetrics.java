@@ -30,6 +30,7 @@ public class CobolFileCodeMetrics implements DataModel {
   private Integer cobolFileId;
   private Integer locActive;
   private Integer locComment;
+  private Integer locOther;
   private StringBuffer description;
   private Integer triggerId;
 
@@ -86,13 +87,18 @@ public class CobolFileCodeMetrics implements DataModel {
   }
   
 
-  @Override
+  public Integer getLocOther() {
+    return locOther;
+  }
+
+  public void setLocOther(Integer locOther) {
+    this.locOther = locOther;
+  }
+
   public String toString() {
-    return "<CobolFileCodeMetrics><id>" + id + "</id><cobolFileId>"
-        + cobolFileId + "</cobolFileId><locActive>" + locActive
-        + "</locActive><locComment>" + locComment
-        + "</locComment><description>" + description
-        + "</description><triggerId>" + triggerId
+    return "<CobolFileCodeMetrics><id>" + id + "</id><cobolFileId>" + cobolFileId + "</cobolFileId><locActive>"
+        + locActive + "</locActive><locComment>" + locComment + "</locComment><locOther>" + locOther
+        + "</locOther><description>" + description + "</description><triggerId>" + triggerId
         + "</triggerId></CobolFileCodeMetrics>";
   }
 
@@ -102,6 +108,10 @@ public class CobolFileCodeMetrics implements DataModel {
 
   public void increamentActiveLoc() {
     this.locActive = (this.locActive == null) ? 1 : this.locActive + 1;
+  }
+  
+  public void increamentOtherLoc() {
+    this.locOther = (this.locOther == null) ? 1 : this.locOther + 1;
   }
   
   public void appendDescription(String txt) {

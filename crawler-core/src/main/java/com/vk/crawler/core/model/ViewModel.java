@@ -22,9 +22,17 @@
 
 package com.vk.crawler.core.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by Vashistha Kumar on 29/01/2015.
  */
+
+@XmlRootElement(name="view")
+@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class ViewModel {
   private String value;
   private String type;
@@ -34,6 +42,7 @@ public class ViewModel {
   private boolean render;
   private boolean enabled;
 
+  @XmlAttribute
   public String getValue() {
     return value;
   }
@@ -42,6 +51,7 @@ public class ViewModel {
     this.value = value;
   }
 
+  @XmlAttribute
   public String getType() {
     return type;
   }
@@ -50,6 +60,7 @@ public class ViewModel {
     this.type = type;
   }
 
+  @XmlAttribute
   public String getStyle() {
     return style;
   }
@@ -58,6 +69,7 @@ public class ViewModel {
     this.style = style;
   }
 
+  @XmlAttribute
   public String getStyleClass() {
     return styleClass;
   }
@@ -66,6 +78,7 @@ public class ViewModel {
     this.styleClass = styleClass;
   }
 
+  @XmlAttribute
   public String getTitle() {
     return title;
   }
@@ -74,6 +87,7 @@ public class ViewModel {
     this.title = title;
   }
 
+  @XmlAttribute
   public boolean isRender() {
     return render;
   }
@@ -82,6 +96,7 @@ public class ViewModel {
     this.render = render;
   }
 
+  @XmlAttribute
   public boolean isEnabled() {
     return enabled;
   }
@@ -92,15 +107,13 @@ public class ViewModel {
 
   @Override
   public String toString() {
-    return "<ViewModel>" +
-        "<value>" + value + "</value>" +
+    return "<value>" + value + "</value>" +
         "<type>" + type + "</type>" +
         "<title>" + title + "</title>" +
         "<style>" + style + "</style>" +
         "<styleClass>" + styleClass + "</styleClass>" +
         "<render>" + render + "</render>" +
-        "<enabled>" + enabled + "</enabled>" +
-        "</ViewModel>";
+        "<enabled>" + enabled + "</enabled>";
   }
 }
 
