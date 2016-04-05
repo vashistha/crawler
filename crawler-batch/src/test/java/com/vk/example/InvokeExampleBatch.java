@@ -33,7 +33,7 @@ import org.springframework.context.annotation.ImportResource;
 
 import com.vk.batch.ExampleBatchTest;
 
-@ImportResource({"classpath:/test/config/test-batch-config.xml",
+@ImportResource({"classpath:/test-batch-config.xml",
 		"classpath:/spring-context.xml",
 		"classpath:/jobs/batch-context.xml"})
 public class InvokeExampleBatch {
