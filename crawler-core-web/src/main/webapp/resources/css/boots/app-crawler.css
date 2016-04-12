@@ -1,0 +1,122 @@
+/*
+ * Copyright (C) 2016 by Vashistha kumar
+ *
+ *    Permission is hereby granted, free of charge, to any person obtaining a copy
+ *    of this software and associated documentation files (the "Software"), to deal
+ *    in the Software without restriction, including without limitation the rights
+ *    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *    copies of the Software, and to permit persons to whom the Software is
+ *    furnished to do so, subject to the following conditions:
+ *
+ *    The above copyright notice and this permission notice shall be included in
+ *    all copies or substantial portions of the Software.
+ *
+ *    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *    THE SOFTWARE.
+ */
+
+#container {
+  margin: 5px auto;
+  box-shadow: 2px 2px 10px #888;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1.1em;
+  font-weight: normal; 
+  font-style : normal;
+  border: 1px solid #dddddd;;
+}
+
+#container .ui-corner-all {
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+
+#content {
+  min-height: 400px;
+}
+#content .main-panel .ui-panel-content {
+  min-height: 400px !important;
+}
+#footer:before {
+  content: "Best viewed in browsers - IE9+, Chrome, Firefox or Safari";
+}
+#footer {
+  text-align: center;
+  font-size: 0.7em;
+}
+#content .ui-panel {
+  border: none;
+}
+
+#content .ui-panel-titlebar {
+  background-color: transparent;
+  border-width: 0px 0px 2px 0px;
+}
+
+#content .ui-panel-titlebar,
+#content .ui-panel-footer {
+  border-color: #337ab7;
+  color: #337ab7;
+}
+
+.main-panel thead tr th.ui-state-default {
+  #background: none repeat scroll 0 0 #4FC3F7;
+  #border-radius: 0px;
+  #border-color: #337ab7;
+  #text-shadow: none;
+  font-weight: normal;
+  #border-bottom-width: 1.5px;
+  color: #337ab7
+}
+.ui-datatable-header,
+.ui-paginator {
+	border-color: #337ab7;
+}
+tr.ui-datatable-odd {
+  background: none repeat scroll 0 0 #E1F5FE;
+}
+.ui-inputfield {
+	margin: 1px !important;
+}
+legend {
+	font-size:inherit;
+}
+.ui-selectonemenu div.ui-selectonemenu-trigger {
+  width: 25px;
+  height: 96%;
+  margin-top: 1px;
+}
+.ui-widget {
+	margin-right: 2px !important;
+} 
+.printButton  {
+	  min-height: 25px !important;
+	  max-height: 25px !important;
+}
+.ui-accordion .ui-accordion-header.ui-state-default {
+  border: 1px solid #337ab7;
+}
+
+.main-panel a {
+  color: #337ab7 !important;
+  text-decoration: none;
+}
+
+/* 
+div.ui-datatable.ui-datatable-sticky {
+	z-index: 1 !important;
+}
+.ui-dialog {
+	z-index: 11 !important;
+}
+#ui-datepicker-div {
+	z-index: 1008 !important;
+}
+.ui-widget-overlay {
+	z-index: 10 !important;
+} */
