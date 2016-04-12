@@ -36,8 +36,8 @@
   
   <modules>
     <module>crawler-core</module>
-    <module>crawler-batch</module>
-    <module>crawler-web</module>
+    <module>crawler-core-web</module>
+    <module>crawler-lang-cobol</module>
   </modules>
 
  <profiles>

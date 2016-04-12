@@ -20,8 +20,10 @@
  *    THE SOFTWARE.
  */
 
-package com.vk.crawler.core.model;
+package com.vk.crawler.core.model.table;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -33,37 +35,34 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vk.crawler.core.CrawlerCoreTest;
-import com.vk.crawler.core.model.table.Table;
 
+public class UnMarshallTableMapsTest extends CrawlerCoreTest {
 
-public class XMLUnMarshallingTest extends CrawlerCoreTest {
-
-  private static Logger logger = LoggerFactory.getLogger(XMLUnMarshallingTest.class);
+  private static Logger logger = LoggerFactory.getLogger(UnMarshallTableMapsTest.class);
   
-  private static Table table;
-  private static String file = "JAXBTest.xml";
+  private static TableMaps tableMaps;
+  private static String file = "tableMaps.xml";
   
- 
   @Test
-  public void testXMLUnMarshalling() throws JAXBException, URISyntaxException {
+  public void testTableUnMarshalling() throws JAXBException, URISyntaxException {
     
-    JAXBContext jaxbContext = JAXBContext.newInstance(Table.class);
+    JAXBContext jaxbContext = JAXBContext.newInstance(TableMaps.class);
 
     Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
     
-    URL url = XMLUnMarshallingTest.class.getResource(file);
+    URL url = UnMarshallTableMapsTest.class.getResource(file);
     
-    table = (Table) jaxbUnmarshaller.unmarshal(new File(url.toURI()));
+    tableMaps = (TableMaps) jaxbUnmarshaller.unmarshal(new File(url.toURI()));
     
-    logger.warn(table.toString());
-    assertThat(table, CoreMatchers.instanceOf(Table.class));
-    assertTrue(table.getTableName().equals("techStack"));
-    assertTrue(table.getRows().size() == 2);
+    assertThat(tableMaps, instanceOf(TableMaps.class));
+    assertThat(tableMaps.getTable("testStack"), instanceOf(Table.class));
+    assertNull(tableMaps.getTable("tech1Stack"));
+    assertTrue(tableMaps.getTables().size() == 2);
+    assertTrue(tableMaps.getTable("testStack").getTableName().equals("testStack"));
   }
 }
