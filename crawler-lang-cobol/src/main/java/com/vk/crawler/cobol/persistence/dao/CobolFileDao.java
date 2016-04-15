@@ -22,29 +22,62 @@
 
 package com.vk.crawler.cobol.persistence.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.sql.DataSource;
+import javax.persistence.Query;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vk.crawler.cobol.model.CobolFileProperties;
 import com.vk.crawler.cobol.persistence.entity.CobolFileEntity;
 
 @Repository
+@Transactional
 public class CobolFileDao {
 
-  @PersistenceContext(unitName="crawler-batch")
+  @PersistenceContext
   private EntityManager entityManager;
 
-  @Autowired
-  private DataSource dataSource;
-  
-  @Transactional
   public CobolFileEntity create(CobolFileEntity entity) {
     entityManager.persist(entity);
     entityManager.flush();
     return entity;
+  }
+  
+  public int deleteById(Integer id) {
+    int deletedRows = 0;
+    CobolFileEntity entity = entityManager.find(CobolFileEntity.class, id);
+    if(entity != null) {
+      entityManager.remove(entity);
+      deletedRows = 1;
+    }
+    return deletedRows;
+  }
+  
+  
+  public int deleteByTriggerId(Integer triggerId) {
+    int deletedRows = 0;
+    Query query = entityManager.createNamedQuery("CobolFileEntity.deleteByTriggerId");
+    query.setParameter("triggerId", triggerId);
+    deletedRows = query.executeUpdate();
+    return deletedRows;
+  }
+  
+  public List<CobolFileProperties> selectByTriggerId(Integer triggerId) {
+    List<CobolFileProperties> files = new ArrayList<>();
+    
+    Query query = entityManager.createNamedQuery("CobolFileEntity.findByTriggerId");
+    query.setParameter("triggerId", triggerId);
+    List<CobolFileEntity> entities = query.getResultList();
+    if(entities != null) {
+      for (CobolFileEntity entity : entities) {
+        files.add(entity.toModel());
+      }
+    }
+    return files;
   }
 }

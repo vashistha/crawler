@@ -31,9 +31,9 @@ import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vk.crawler.cobol.batch.model.CobolCrawlerTrigger;
-import com.vk.crawler.cobol.persistence.dao.CobolCrawlerTriggerDao;
-import com.vk.crawler.cobol.utils.CrawlerConstant.TriggerStatus;
+import com.vk.crawler.core.batch.CrawlerConstant.TriggerStatus;
+import com.vk.crawler.core.batch.trigger.CrawlerTriggerModel;
+import com.vk.crawler.core.batch.trigger.CrawlerTriggerDao;
 import com.vk.crawler.core.util.DateUtils;
 import com.vk.crawler.core.util.Timer;
 
@@ -43,7 +43,7 @@ public class InvokeCobolCrawlerBatch {
   private static final Timer timer = new Timer("InvokeCobolCrawler");
   
   @Autowired
-  private CobolCrawlerTriggerDao cobolCrawlerTriggerDao;
+  private CrawlerTriggerDao cobolCrawlerTriggerDao;
   
   @Autowired
   private JobLauncher jobLauncher;
@@ -54,7 +54,7 @@ public class InvokeCobolCrawlerBatch {
   public void start(Integer triggerId) throws Exception {
 
     try {
-      CobolCrawlerTrigger trigger = cobolCrawlerTriggerDao.select(triggerId);
+      CrawlerTriggerModel trigger = cobolCrawlerTriggerDao.select(triggerId);
       
       if(trigger == null || trigger.isEmpty()) {
         logger.debug("Trigger not found");
@@ -83,7 +83,7 @@ public class InvokeCobolCrawlerBatch {
     }
   }
   
-  public void updateTrigger(CobolCrawlerTrigger trigger, String status, Integer timeElapsed) {
+  public void updateTrigger(CrawlerTriggerModel trigger, String status, Integer timeElapsed) {
     trigger.setStatus(status);
     trigger.setUpdatedTs(DateUtils.getCurrentDate());
     trigger.setUpdatedBy("cobolFileAnalyserJob");

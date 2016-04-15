@@ -20,44 +20,41 @@
  *    THE SOFTWARE.
  */
 
-package com.vk.example.entity;
+package com.vk.crawler.plsql;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 
-import com.vk.crawler.cobol.persistence.dao.CobolFileDao;
-import com.vk.crawler.cobol.persistence.entity.CobolFileEntity;
+@ImportResource({"classpath:/spring-context.xml",
+    "classpath:/persistence-context.xml",
+    "classpath:/jobs/cobol-crawler-batch.xml"})
+//@ComponentScan(basePackages = {"com.vk.crawler"})
+public class PLSQLCrawlerBatchApplication {
 
-@ImportResource({"classpath:/cobol-spring-context.xml", 
-                 "classpath:/persistence-context.xml"})
-
-public class TestEntity {
+  private static final Logger logger = LoggerFactory.getLogger(PLSQLCrawlerBatchApplication.class);
+  
   public static void main(String[] args) {
-
-    SpringApplication app = new SpringApplication(TestEntity.class);
+    //ConfigurableApplicationContext ctx= SpringApplication.run(CrawlerApplication.class, args);
+    SpringApplication app = new SpringApplication(PLSQLCrawlerBatchApplication.class);
     app.setWebEnvironment(false);
     ConfigurableApplicationContext ctx= app.run(args);
-    
-    CobolFileDao cobolFileDao = (CobolFileDao) ctx.getBean("cobolFileDao");
-    callEntity(cobolFileDao,"name1");
-    callEntity(cobolFileDao,"name2");
-    System.out.println("Done");
-
-  }
+    PLSQLCrawlerBatchApplication obj = new PLSQLCrawlerBatchApplication();
+   
+    obj.runCobolCrawler(ctx);
+   }
   
-  public static void callEntity(CobolFileDao cobolFileDao, String fileName) {
+  public void runCobolCrawler(ConfigurableApplicationContext ctx) {
     try {
-      CobolFileEntity entity = new CobolFileEntity();
-      entity.setFileName(fileName);
-      entity.setDigest("D");
-      entity.setRelativePath("Path");
-      entity.setTriggerId(1);
-      cobolFileDao.create(entity);
-    } 
-    catch (Exception e) {
-      e.printStackTrace();
+      InvokePLSQLCrawlerBatch cobolCrawler = (InvokePLSQLCrawlerBatch) ctx.getBean("cobolCrawler");
+      cobolCrawler.start(2);
+      logger.debug("Cobol Crawler completed successfully.");
     }
-
+    catch (Exception e) {
+      logger.error("EXCEPTION");
+      logger.error("", e);
+    }
   }
 }

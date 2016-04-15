@@ -35,6 +35,10 @@ public class FileProperties implements DataModel {
   private String digest;
   
   
+  public FileProperties() {
+    super();
+  }
+
   public FileProperties(String fileName, String absolutePath, String digest) {
     super();
     this.fileName = fileName;
@@ -56,16 +60,16 @@ public class FileProperties implements DataModel {
     this.digest = digest;
   }
   
-  public boolean isEmpty() {
-    return StringUtils.isEmpty(fileName);
-  }
-
   public String getRelativePath() {
     return relativePath;
   }
 
   public void setRelativePath(String relativePath) {
     this.relativePath = relativePath;
+  }
+  
+  public boolean isEmpty() {
+    return StringUtils.isEmpty(fileName);
   }
 
   @Override

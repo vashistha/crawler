@@ -20,7 +20,7 @@
  *    THE SOFTWARE.
  */
 
-package com.vk.crawler.cobol.batch.model;
+package com.vk.crawler.plsql.batch.model;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -28,7 +28,7 @@ import java.util.Date;
 import com.vk.crawler.core.model.DataModel;
 import com.vk.crawler.core.util.StringUtils;
 
-public class CobolCrawlerTrigger implements DataModel {
+public class PLSQLCrawlerTrigger implements DataModel {
   private static final long serialVersionUID = 892166799541735176L;
   private Integer id;
   private String triggerName;

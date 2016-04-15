@@ -24,11 +24,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xmlns:tx="http://www.springframework.org/schema/tx"
+   xmlns:jpa="http://www.springframework.org/schema/data/jpa"
    xsi:schemaLocation="
       http://www.springframework.org/schema/beans 
       http://www.springframework.org/schema/beans/spring-beans.xsd
       http://www.springframework.org/schema/tx 
-      http://www.springframework.org/schema/tx/spring-tx.xsd">
+      http://www.springframework.org/schema/tx/spring-tx.xsd
+      http://www.springframework.org/schema/data/jpa 
+      http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
   <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
@@ -42,19 +45,34 @@
     <property name="generateDdl" value="true" />
   </bean>
   
-  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-    <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence-*.xml" />
-    <property name="persistenceUnitName" value="crawler-batch" />
-    <property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
-    <property name="dataSource" ref="dataSource"/>
-  </bean>
-
   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     <property name="entityManagerFactory" ref="entityManagerFactory" />
   </bean>
-
-
-  <!-- <bean id="cobolFileDao" class="com.vk.crawler.cobol.persistence.dao.CobolFileDao"/>
-  <bean id="cobolCrawlerTriggerDao" class="com.vk.crawler.cobol.persistence.dao.CobolCrawlerTriggerDao"/>
- -->
+  
+  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="persistenceUnitManager" ref="pum"/>
+    <property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+    
+    <property name="jpaProperties">
+      <props>
+        <prop key="hibernate.default_schema">CRAWLER</prop>
+      </props>
+    </property>
+  </bean>
+  
+  <bean id="pum" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+    <property name="packagesToScan" >
+      <list>
+        <value>com.vk.crawler.*</value>
+      </list>
+    </property>
+    <property name="dataSources">
+      <map>
+        <entry key="localDataSource" value-ref="dataSource"/>
+      </map>
+    </property>
+    <!-- if no datasource is specified, use this one -->
+    <property name="defaultDataSource" ref="dataSource"/>
+    <property name="defaultPersistenceUnitName" value="crawler-jpa-unit"/>
+  </bean>
 </beans>

@@ -20,7 +20,7 @@
  *    THE SOFTWARE.
  */
 
-package com.vk.crawler.cobol.persistence.entity;
+package com.vk.crawler.core.batch.trigger;
 
 import java.util.Date;
 
@@ -36,23 +36,22 @@ import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.vk.crawler.cobol.batch.model.CobolCrawlerTrigger;
 import com.vk.crawler.core.model.DataModel;
 import com.vk.crawler.core.util.StringUtils;
 
 @Entity
-@Table(name="VI_COBOL_CRAWLER_TRIGGER")
-@TableGenerator(name = "cobol_crawler_trigger", table = "SEQUENCE", pkColumnName = "SEQ_NAME", pkColumnValue = "VI_COBOL_CRAWLER_TRIGGER", valueColumnName = "SEQ_COUNT", allocationSize = 1)
+@Table(name="VI_CRAWLER_TRIGGER")
+@TableGenerator(name = "crawler_trigger", table = "SEQUENCE", pkColumnName = "SEQ_NAME", pkColumnValue = "VI_CRAWLER_TRIGGER", valueColumnName = "SEQ_COUNT", allocationSize = 1)
 @NamedQueries({
-  @NamedQuery(name="CobolCrawlerTriggerEntity.findAll", query="SELECT p FROM CobolCrawlerTriggerEntity p"),
-  @NamedQuery(name="CobolCrawlerTriggerEntity.findByTriggerName", query="SELECT p FROM CobolCrawlerTriggerEntity p WHERE UPPER(p.triggerName) LIKE :triggerName")
+  @NamedQuery(name="CrawlerTriggerEntity.findAll", query="SELECT p FROM CrawlerTriggerEntity p"),
+  @NamedQuery(name="CrawlerTriggerEntity.findByTriggerName", query="SELECT p FROM CrawlerTriggerEntity p WHERE UPPER(p.triggerName) LIKE :triggerName")
 })
-public class CobolCrawlerTriggerEntity implements DataModel {
+public class CrawlerTriggerEntity implements DataModel {
 
   private static final long serialVersionUID = 2719950390467995957L;
 
   @Id
-  @GeneratedValue(strategy=GenerationType.TABLE, generator = "cobol_crawler_trigger")
+  @GeneratedValue(strategy=GenerationType.TABLE, generator = "crawler_trigger")
   private Integer id;
 
   @Column(name="TRIGGER_NAME")
@@ -161,8 +160,8 @@ public class CobolCrawlerTriggerEntity implements DataModel {
     this.updatedTs = updatedTs;
   }
   
-  public CobolCrawlerTrigger toModel() {
-    CobolCrawlerTrigger a = new CobolCrawlerTrigger();
+  public CrawlerTriggerModel toModel() {
+    CrawlerTriggerModel a = new CrawlerTriggerModel();
     a.setId(id);
     a.setTriggerName(triggerName);
     a.setDescription(description);
@@ -176,8 +175,8 @@ public class CobolCrawlerTriggerEntity implements DataModel {
     return a;
   }
   
-  public static CobolCrawlerTriggerEntity valueOf(CobolCrawlerTrigger model) {
-    CobolCrawlerTriggerEntity a = new CobolCrawlerTriggerEntity();
+  public static CrawlerTriggerEntity valueOf(CrawlerTriggerModel model) {
+    CrawlerTriggerEntity a = new CrawlerTriggerEntity();
     a.setId(model.getId());
     a.setTriggerName(model.getTriggerName());
     a.setDescription(model.getDescription());

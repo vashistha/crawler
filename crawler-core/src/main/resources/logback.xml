@@ -24,7 +24,6 @@
 <configuration>
   <include resource="org/springframework/boot/logging/logback/base.xml"/>
   <logger name="com.vk" level="INFO"></logger>
-  <logger name="org.springframework" level="WARN"></logger>
-  <logger name="org.hibernate" level="WARN"></logger>
-  
+  <logger name="org.springframework" level="INFO"></logger>
+  <logger name="org.hibernate" level="INFO"></logger>
 </configuration>

@@ -32,6 +32,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+import com.vk.crawler.cobol.model.CobolFileProperties;
 import com.vk.crawler.core.model.DataModel;
 import com.vk.crawler.core.util.StringUtils;
 
@@ -39,7 +40,9 @@ import com.vk.crawler.core.util.StringUtils;
 @Table(name="VI_COBOL_FILE")
 @TableGenerator(name = "cobol_file", table = "SEQUENCE", pkColumnName = "SEQ_NAME", pkColumnValue = "VI_COBOL_FILE", valueColumnName = "SEQ_COUNT", allocationSize = 1)
 @NamedQueries({
-  @NamedQuery(name="CobolFileEntity.findAll", query="SELECT p FROM CobolFileEntity p")
+  @NamedQuery(name="CobolFileEntity.findAll", query="SELECT p FROM CobolFileEntity p"),
+  @NamedQuery(name="CobolFileEntity.findByTriggerId", query="SELECT p FROM CobolFileEntity p WHERE p.triggerId=:triggerId"),
+  @NamedQuery(name="CobolFileEntity.deleteByTriggerId", query="DELETE FROM CobolFileEntity p WHERE p.triggerId=:triggerId")
 })
 public class CobolFileEntity implements DataModel {
 
@@ -93,4 +96,24 @@ public class CobolFileEntity implements DataModel {
     return StringUtils.isEmpty(fileName);
   }
   
+  public static CobolFileEntity valueOf(CobolFileProperties model) {
+    CobolFileEntity e = new CobolFileEntity();
+    e.setId(model.getId());
+    e.setFileName(model.getFileName());
+    e.setRelativePath(model.getRelativePath());
+    e.setDigest(model.getDigest());
+    e.setTriggerId(model.getTriggerId());
+    
+    return e;
+  }
+  
+  public CobolFileProperties toModel() {
+    CobolFileProperties m = new CobolFileProperties();
+    m.setId(this.id);
+    m.setFileName(this.fileName);
+    m.setRelativePath(this.relativePath);
+    m.setDigest(this.digest);
+    m.setTriggerId(this.triggerId);
+    return m;
+  }
 }

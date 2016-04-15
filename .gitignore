@@ -1,4 +1,1 @@
-*.iml
-builds/
-.idea/
-sample/
+*.iml*/*.imlbuilds/.idea/sample/

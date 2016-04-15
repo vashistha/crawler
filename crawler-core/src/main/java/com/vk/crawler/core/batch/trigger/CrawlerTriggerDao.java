@@ -20,7 +20,7 @@
  *    THE SOFTWARE.
  */
 
-package com.vk.crawler.cobol.persistence.dao;
+package com.vk.crawler.core.batch.trigger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,34 +35,32 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vk.crawler.cobol.batch.model.CobolCrawlerTrigger;
-import com.vk.crawler.cobol.persistence.entity.CobolCrawlerTriggerEntity;
 import com.vk.crawler.core.exception.CoreException;
 import com.vk.crawler.core.exception.ErrorMessage;
 
 @Repository
 @Transactional
-public class CobolCrawlerTriggerDao {
-  private static final Logger logger = LoggerFactory.getLogger(CobolCrawlerTriggerDao.class);
+public class CrawlerTriggerDao {
+  private static final Logger logger = LoggerFactory.getLogger(CrawlerTriggerDao.class);
   
-  @PersistenceContext(unitName="crawler-batch")
+  @PersistenceContext
   private EntityManager entityManager;
 
 
-  public CobolCrawlerTriggerEntity create(CobolCrawlerTriggerEntity entity) {
+  public CrawlerTriggerEntity create(CrawlerTriggerEntity entity) {
     entityManager.persist(entity);
     entityManager.flush();
     return entity;
   }
   
-  public CobolCrawlerTriggerEntity update(CobolCrawlerTriggerEntity entity) {
+  public CrawlerTriggerEntity update(CrawlerTriggerEntity entity) {
     entity = entityManager.merge(entity);
     entityManager.flush();
     return entity;
   }
   
-  public CobolCrawlerTriggerEntity update(CobolCrawlerTrigger model) {
-    CobolCrawlerTriggerEntity entity = CobolCrawlerTriggerEntity.valueOf(model);
+  public CrawlerTriggerEntity update(CrawlerTriggerModel model) {
+    CrawlerTriggerEntity entity = CrawlerTriggerEntity.valueOf(model);
     entity = entityManager.merge(entity);
     entityManager.flush();
     return entity;
@@ -70,7 +68,7 @@ public class CobolCrawlerTriggerDao {
   
   public void delete(Integer triggerId) {
     try {
-      CobolCrawlerTriggerEntity entity = entityManager.find(CobolCrawlerTriggerEntity.class, triggerId);
+      CrawlerTriggerEntity entity = entityManager.find(CrawlerTriggerEntity.class, triggerId);
       if(entity != null) {
         entityManager.remove(entity);
       }
@@ -80,14 +78,14 @@ public class CobolCrawlerTriggerDao {
     }
   }
   
-  public List<CobolCrawlerTrigger> select(String triggerName) throws CoreException {
-    List<CobolCrawlerTrigger> models = new ArrayList<CobolCrawlerTrigger>();
+  public List<CrawlerTriggerModel> select(String triggerName) throws CoreException {
+    List<CrawlerTriggerModel> models = new ArrayList<CrawlerTriggerModel>();
     try {
-      Query query = entityManager.createNamedQuery("CobolCrawlerTriggerEntity.findByTriggerName");
+      Query query = entityManager.createNamedQuery("CrawlerTriggerEntity.findByTriggerName");
       query.setParameter("triggerName", "%" + triggerName.toUpperCase() + "%");
-      List<CobolCrawlerTriggerEntity> entitis = (List<CobolCrawlerTriggerEntity>)query.getResultList();
+      List<CrawlerTriggerEntity> entitis = (List<CrawlerTriggerEntity>)query.getResultList();
       if (entitis != null) {
-        for (CobolCrawlerTriggerEntity entity : entitis) {
+        for (CrawlerTriggerEntity entity : entitis) {
           models.add(entity.toModel());
         }
       }
@@ -102,10 +100,10 @@ public class CobolCrawlerTriggerDao {
     return models;
   }
   
-  public CobolCrawlerTrigger select(Integer triggerId) {
-    CobolCrawlerTrigger model = null;
+  public CrawlerTriggerModel select(Integer triggerId) {
+    CrawlerTriggerModel model = null;
     try {
-      CobolCrawlerTriggerEntity entity = entityManager.find(CobolCrawlerTriggerEntity.class, triggerId);
+      CrawlerTriggerEntity entity = entityManager.find(CrawlerTriggerEntity.class, triggerId);
       if (entity != null) {
         model = entity.toModel();
       }

@@ -20,17 +20,28 @@
  *    THE SOFTWARE.
  */
 
-package com.vk.crawler.cobol.utils;
+package com.vk.crawler.cobol.model;
 
-public class CrawlerConstant {
-  public enum TriggerStatus { NOT_STARTED("NOT STARTED"), STARTED("STARTED"), COMPLETED("COMPLETED"), FAILED("FAILED");
-  private String value;
-  TriggerStatus(String v) {
-    this.value = v;
-  }
-  public String getValue() {
-    return value;
-  }
-};
+public class CobolFileProperties extends FileProperties {
 
+  private static final long serialVersionUID = 4937036530430124996L;
+  
+  private Integer id;
+  private Integer triggerId;
+  
+  public Integer getId() {
+    return id;
+  }
+  
+  public void setId(Integer id) {
+    this.id = id;
+  }
+  
+  public Integer getTriggerId() {
+    return triggerId;
+  }
+  
+  public void setTriggerId(Integer triggerId) {
+    this.triggerId = triggerId;
+  }
 }
