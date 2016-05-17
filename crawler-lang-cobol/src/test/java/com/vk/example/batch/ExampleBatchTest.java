@@ -37,7 +37,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-    "classpath:/test-batch-config.xml",
+    "classpath:/test-cobol-batch-config.xml",
     "classpath:/cobol-spring-context.xml",
     "classpath:/batch-context.xml"})
 public class ExampleBatchTest {

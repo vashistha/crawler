@@ -32,29 +32,29 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vk.crawler.core.batch.CrawlerConstant.TriggerStatus;
+import com.vk.crawler.core.batch.trigger.CrawlerTriggerDao;
+import com.vk.crawler.core.batch.trigger.CrawlerTriggerModel;
 import com.vk.crawler.core.util.DateUtils;
 import com.vk.crawler.core.util.Timer;
-import com.vk.crawler.plsql.batch.model.PLSQLCrawlerTrigger;
-import com.vk.crawler.plsql.persistence.dao.PLSQLCrawlerTriggerDao;
 
 public class InvokePLSQLCrawlerBatch {
 
   private static final Logger logger = LoggerFactory.getLogger(InvokePLSQLCrawlerBatch.class);
-  private static final Timer timer = new Timer("InvokeCobolCrawler");
+  private static final Timer timer = new Timer(InvokePLSQLCrawlerBatch.class.getName());
   
   @Autowired
-  private PLSQLCrawlerTriggerDao cobolCrawlerTriggerDao;
+  private CrawlerTriggerDao triggerDao;
   
   @Autowired
   private JobLauncher jobLauncher;
   
   @Autowired
-  private Job cobolFileAnalyserJob;
+  private Job plsqlTableAnalyserJob;
   
   public void start(Integer triggerId) throws Exception {
 
     try {
-      PLSQLCrawlerTrigger trigger = cobolCrawlerTriggerDao.select(triggerId);
+      CrawlerTriggerModel trigger = triggerDao.select(triggerId);
       
       if(trigger == null || trigger.isEmpty()) {
         logger.debug("Trigger not found");
@@ -71,23 +71,23 @@ public class InvokePLSQLCrawlerBatch {
       updateTrigger(trigger, TriggerStatus.STARTED.getValue() , null);
       
       timer.start(); 
-      JobExecution execution = jobLauncher.run(cobolFileAnalyserJob, jobParameters);
+      JobExecution execution = jobLauncher.run(plsqlTableAnalyserJob, jobParameters);
       timer.end();
       
       logger.debug("Exit Status : " + execution.getStatus() + " and Time taken : " + timer.getTotalTime());
       updateTrigger(trigger, execution.getStatus().toString(), Integer.valueOf(timer.getTotalTime()+""));
     } 
     catch (Exception e) {
-      logger.error("Error in cobol crawler for trigger id = " + triggerId);
+      logger.error("Error in PL/SQL crawler for trigger id = " + triggerId);
       throw e;
     }
   }
   
-  public void updateTrigger(PLSQLCrawlerTrigger trigger, String status, Integer timeElapsed) {
+  public void updateTrigger(CrawlerTriggerModel trigger, String status, Integer timeElapsed) {
     trigger.setStatus(status);
     trigger.setUpdatedTs(DateUtils.getCurrentDate());
-    trigger.setUpdatedBy("cobolFileAnalyserJob");
+    trigger.setUpdatedBy("plsqlTableAnalyserJob");
     trigger.setProcessingTime(timeElapsed);
-    cobolCrawlerTriggerDao.update(trigger);
+    triggerDao.update(trigger);
   }
 }

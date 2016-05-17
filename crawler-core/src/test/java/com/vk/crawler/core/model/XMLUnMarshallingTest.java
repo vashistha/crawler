@@ -61,7 +61,7 @@ public class XMLUnMarshallingTest extends CrawlerCoreTest {
     
     table = (Table) jaxbUnmarshaller.unmarshal(new File(url.toURI()));
     
-    logger.warn(table.toString());
+    //logger.warn(table.toString());
     assertThat(table, CoreMatchers.instanceOf(Table.class));
     assertTrue(table.getTableName().equals("techStack"));
     assertTrue(table.getRows().size() == 2);

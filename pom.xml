@@ -36,9 +36,9 @@
   
   <modules>
     <module>crawler-core</module>
-    <module>crawler-core-web</module>
     <module>crawler-lang-cobol</module>
     <module>crawler-lang-plsql</module>
+    <module>crawler-core-web</module>
   </modules>
 
  <profiles>

@@ -79,7 +79,7 @@ public class XMLMarshallingTest extends CrawlerCoreTest {
     marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
     StringWriter stringWriter = new StringWriter();
     marshaller.marshal(table, stringWriter);
-    logger.debug(stringWriter.toString());
+    //logger.debug(stringWriter.toString());
     
     
     assertThat(stringWriter.toString(), CoreMatchers.containsString("<row id=\"2\" header=\"true\" footer=\"false\">"));
