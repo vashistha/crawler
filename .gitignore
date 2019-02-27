@@ -23,6 +23,6 @@
 hs_err_pid*
 
 .settings/
-.project/
+.project
 */.settings/
-*/.project/
+*/.project
