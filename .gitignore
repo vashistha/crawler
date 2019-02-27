@@ -27,4 +27,6 @@ hs_err_pid*
 */.settings/
 */.project
 builds/
-*/classes/
+**/classes/
+classes/
+
